@@ -1,0 +1,26 @@
+{
+  "name": "aoc-2020",
+  "version": "1.0.0",
+  "description": "[![Completion Status](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/mariotacke/advent-of-code-2020/master/.github/badges/completion.json)](https://github.com/mariotacke/advent-of-code-2020)",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solodov-dev/aoc-2020.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/solodov-dev/aoc-2020/issues"
+  },
+  "homepage": "https://github.com/solodov-dev/aoc-2020#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.14.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "jest": "^26.6.3"
+  }
+}
