@@ -2,6 +2,9 @@
 
 Advent of Code 2020
 
+## Test
+  Run `npm test` to run all the tests.
+
 ## Days
 
 - [Day 1: ](day_01/)

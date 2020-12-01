@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "[![Completion Status](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/mariotacke/advent-of-code-2020/master/.github/badges/completion.json)](https://github.com/mariotacke/advent-of-code-2020)",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "jest"
   },
@@ -16,7 +17,11 @@
     "url": "https://github.com/solodov-dev/aoc-2020/issues"
   },
   "homepage": "https://github.com/solodov-dev/aoc-2020#readme",
-  "dependencies": {},
+  "dependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.12.7",
+    "babel-jest": "^26.6.3"
+  },
   "devDependencies": {
     "eslint": "^7.14.0",
     "eslint-config-airbnb-base": "^14.2.1",
