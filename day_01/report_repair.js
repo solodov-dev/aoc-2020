@@ -1,11 +1,7 @@
-import fs from 'fs';
-import path from 'path';
+import { readFile } from '../helpers/read_file';
 
 function readFileAndSort(fileName) {
-  return fs
-    .readFileSync(path.resolve(__dirname, fileName))
-    .toString()
-    .split('\n')
+  return readFile(__dirname, fileName)
     .map((line) => Number(line))
     .sort((a, b) => a - b);
 }
