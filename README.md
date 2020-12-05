@@ -16,6 +16,7 @@ Collect stars by solving puzzles. Two puzzles will be made available on each day
 - [Day 2: Password Philosophy](day_02/)
 - [Day 3: Toboggan Trajectory](day_03/)
 - [Day 3: Passport Processing](day_04/)
+- [Day 3: Binary Boarding](day_05/)
 
 
 ### Test
