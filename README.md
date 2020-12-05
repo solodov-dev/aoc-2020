@@ -1,6 +1,6 @@
 # AoC-2020
 
-## Advent of Code 2020
+## [Advent of Code 2020](http://adventofcode.com/2020)
 
 After saving Christmas five years in a row, you've decided to take a vacation at a nice resort on a tropical island. Surely, Christmas will go on without you.
 
@@ -10,17 +10,25 @@ To save your vacation, you need to get all fifty stars by December 25th.
 
 Collect stars by solving puzzles. Two puzzles will be made available on each day in the Advent calendar; the second puzzle is unlocked when you complete the first. Each puzzle grants one star. Good luck!
 
+## Install
+```bash
+$ npm i
+```
+
+## Run
+```bash
+$ npm run log [day number]
+```
+
+## Test
+```bash
+$ npm test
+```
+
 ## Days
 
 - [Day 1: Report repair](day_01/)
 - [Day 2: Password Philosophy](day_02/)
 - [Day 3: Toboggan Trajectory](day_03/)
-- [Day 3: Passport Processing](day_04/)
-- [Day 3: Binary Boarding](day_05/)
-
-
-### Test
-  Run `npm test` to run all the tests.
-
-### Advent of Code
-- http://adventofcode.com/2020
+- [Day 4: Passport Processing](day_04/)
+- [Day 5: Binary Boarding](day_05/)

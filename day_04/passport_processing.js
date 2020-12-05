@@ -1,18 +1,19 @@
-import { readFileSync } from 'fs';
-import path from 'path';
-
-const validatePassports = (fileName, validator) => {
-  const passports = readPassports(fileName);
+const validatePassports = (input, validator) => {
   let valid = 0;
+  const passports = parsePassports(input);
   passports.forEach((passport) => validator(passport) && valid++);
   return valid;
 };
 
-const readPassports = (fileName) =>
-  readFileSync(path.resolve(__dirname, fileName))
-    .toString()
-    .split(/\n{2,}/g)
-    .map((passport) => passport.replace(/\n/g, ' '));
+const parsePassports = (input) => {
+  let passports = [''];
+  for (let line of input) {
+    line === ''
+      ? passports.push('')
+      : (passports[passports.length - 1] += line);
+  }
+  return passports;
+};
 
 const hasRequiredFields = (passport) => {
   const fields = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid' /*'cid'*/];

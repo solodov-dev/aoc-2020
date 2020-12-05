@@ -1,13 +1,9 @@
-import { readFile } from '../helpers/read_file';
+const toNumberAndSort = (input) => {
+  return input.map((line) => +line).sort((a, b) => a - b);
+};
 
-function readFileAndSort(fileName) {
-  return readFile(__dirname, fileName)
-    .map((line) => Number(line))
-    .sort((a, b) => a - b);
-}
-
-export function getTwoNumbers(fileName) {
-  const report = readFileAndSort(fileName);
+const getTwoNumbers = (input) => {
+  const report = toNumberAndSort(input);
   for (let i = 0; i < report.length - 1; i++) {
     for (let j = i + 1; j < report.length; j++) {
       if (report[i] + report[j] === 2020) return report[i] * report[j];
@@ -15,10 +11,10 @@ export function getTwoNumbers(fileName) {
     }
   }
   return 'Not found';
-}
+};
 
-export function getThreeNumbers(fileName) {
-  const report = readFileAndSort(fileName);
+const getThreeNumbers = (input) => {
+  const report = toNumberAndSort(input);
   for (let i = 0; i < report.length - 2; i++) {
     if (report[i] === 0) continue;
     for (let j = i + 1; j < report.length - 1; j++) {
@@ -31,4 +27,6 @@ export function getThreeNumbers(fileName) {
     }
   }
   return 'Not found';
-}
+};
+
+export { getTwoNumbers, getThreeNumbers };

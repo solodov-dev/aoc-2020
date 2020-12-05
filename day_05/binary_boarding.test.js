@@ -1,9 +1,4 @@
-import {
-  binarySearch,
-  findMySeat,
-  getHighestId,
-  getSeatId,
-} from './binary_boarding';
+import { binarySearch, getSeatId } from './binary_boarding.js';
 
 describe('Binary boarding', () => {
   it('Finds the correct row', () => {
@@ -14,13 +9,5 @@ describe('Binary boarding', () => {
   });
   it('Finds ID for  BFFFBBFRRR', () => {
     expect(getSeatId('BFFFBBFRRR')).toBe(567);
-  });
-
-  it('Finds the highest ID', () => {
-    console.log('Highest id is: ', getHighestId());
-  });
-
-  it('Finds my seat', () => {
-    console.log('Your seat is: ', findMySeat());
   });
 });

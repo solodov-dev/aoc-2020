@@ -1,5 +1,3 @@
-import { readFile } from '../helpers/read_file';
-
 const getSeatId = (ticket) => {
   const [rows, cols] = [ticket.slice(0, 7), ticket.slice(7)];
   const row = binarySearch(rows, Array.from(Array(128).keys()));
@@ -14,17 +12,13 @@ const binarySearch = (code, seats) => {
     : binarySearch(code.slice(1), seats.slice(seats.length / 2));
 };
 
-const getHighestId = () => {
-  const ids = readFile(__dirname, 'input.txt').map((ticket) =>
-    getSeatId(ticket)
-  );
+const getHighestId = (file) => {
+  const ids = file.map((ticket) => getSeatId(ticket));
   return Math.max(...ids);
 };
 
-const findMySeat = () => {
-  const ids = readFile(__dirname, 'input.txt')
-    .map((ticket) => getSeatId(ticket))
-    .sort();
+const findMySeat = (file) => {
+  const ids = file.map((ticket) => getSeatId(ticket)).sort();
   for (let i = 0; i < ids.length - 1; i++) {
     if (ids[i + 1] - ids[i] > 1) return ids[i] + 1;
   }
