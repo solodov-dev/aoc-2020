@@ -27,8 +27,9 @@ $ npm test
 
 ## Days
 
-- [Day 1: Report repair](day_01/)
+- [Day 1: Report Repair](day_01/)
 - [Day 2: Password Philosophy](day_02/)
 - [Day 3: Toboggan Trajectory](day_03/)
 - [Day 4: Passport Processing](day_04/)
 - [Day 5: Binary Boarding](day_05/)
+- [Day 6: Cusom Customs](day_06/)
