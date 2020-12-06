@@ -1,9 +1,5 @@
-const validatePassports = (input, validator) => {
-  let valid = 0;
-  const passports = parsePassports(input);
-  passports.forEach((passport) => validator(passport) && valid++);
-  return valid;
-};
+const validatePassports = (input, validator) =>
+  parsePassports(input).filter(validator).length;
 
 const parsePassports = (input) => {
   let passports = [''];
@@ -15,13 +11,10 @@ const parsePassports = (input) => {
   return passports;
 };
 
-const hasRequiredFields = (passport) => {
-  const fields = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid' /*'cid'*/];
-  for (let field of fields) {
-    if (!passport.includes(field)) return false;
-  }
-  return true;
-};
+const hasRequiredFields = (passport) =>
+  !['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid'].find(
+    (field) => !passport.includes(field)
+  );
 
 const allFieldsAreValid = (passport) => {
   if (!hasRequiredFields(passport)) return false;

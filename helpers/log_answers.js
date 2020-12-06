@@ -8,10 +8,11 @@ const logAnswers = async (day) => {
       new URL(`../inputs/input${day}`, import.meta.url),
       'utf8',
       (err, data) => {
-        if (err) console.error(err);
-        answers.forEach((answer) => {
-          console.log(`${answer.title}: ${answer.result(data.split('\n'))}`);
-        });
+        err
+          ? console.error(err)
+          : answers.forEach((answer) =>
+              console.log(`${answer.title}: ${answer.result(data.split('\n'))}`)
+            );
       }
     );
   } catch (e) {

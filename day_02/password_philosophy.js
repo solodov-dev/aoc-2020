@@ -1,8 +1,5 @@
-const validatePasswords = (passwords, validator) => {
-  let valid = 0;
-  passwords.forEach((password) => validator(password) && valid++);
-  return valid;
-};
+const validatePasswords = (passwords, validator) =>
+  passwords.filter(validator).length;
 
 const isValid = (record) => {
   const [min, max, char, password] = record.split(/-| |: /);

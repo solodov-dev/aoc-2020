@@ -14,14 +14,13 @@ const countTrees = (input, down, right) => {
   return trees;
 };
 
-const product = (file, countTrees) => {
-  return [
+const product = (file, countTrees) =>
+  [
     [1, 3],
     [1, 1],
     [1, 5],
     [1, 7],
     [2, 1],
   ].reduce((acc, cur) => countTrees(file, cur[0], cur[1]) * acc, 1);
-};
 
 export { countTrees, product };

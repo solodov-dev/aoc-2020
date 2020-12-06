@@ -1,6 +1,5 @@
-const toNumberAndSort = (input) => {
-  return input.map((line) => +line).sort((a, b) => a - b);
-};
+const toNumberAndSort = (input) =>
+  input.map((line) => +line).sort((a, b) => a - b);
 
 const getTwoNumbers = (input) => {
   const report = toNumberAndSort(input);

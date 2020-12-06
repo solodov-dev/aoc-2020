@@ -1,26 +1,11 @@
-const countUniqueAnswers = (group) => {
-  let answers = [];
-  const string = group.join('');
-  for (let char of string) {
-    if (!answers.includes(char)) answers.push(char);
-  }
-  return answers.length;
-};
+const countUniqueAnswers = (group) => new Set([...group.join('')]).size;
 
-const countSameAnswers = (group) => {
-  let count = 0;
-  [...group[0]].forEach((char) => {
-    group.every((el) => el.includes(char)) && count++;
-  });
-  return count;
-};
+const countSameAnswers = (group) =>
+  [...group[0]].filter((letter) => group.every((line) => line.includes(letter)))
+    .length;
 
-const reduceAnswers = (input, reducer) => {
-  const groups = parseGroups(input);
-  return groups.reduce((acc, cur) => {
-    return (acc += reducer(cur));
-  }, 0);
-};
+const reduceAnswers = (input, reducer) =>
+  parseGroups(input).reduce((acc, cur) => (acc += reducer(cur)), 0);
 
 const parseGroups = (input) => {
   let groups = [[]];

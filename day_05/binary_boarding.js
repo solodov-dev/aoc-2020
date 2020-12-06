@@ -12,16 +12,13 @@ const binarySearch = (code, seats) => {
     : binarySearch(code.slice(1), seats.slice(seats.length / 2));
 };
 
-const getHighestId = (file) => {
-  const ids = file.map((ticket) => getSeatId(ticket));
-  return Math.max(...ids);
-};
+const getHighestId = (file) =>
+  Math.max(...file.map((ticket) => getSeatId(ticket)));
 
-const findMySeat = (file) => {
-  const ids = file.map((ticket) => getSeatId(ticket)).sort();
-  for (let i = 0; i < ids.length - 1; i++) {
-    if (ids[i + 1] - ids[i] > 1) return ids[i] + 1;
-  }
-};
+const findMySeat = (file) =>
+  file
+    .map((ticket) => getSeatId(ticket))
+    .sort()
+    .find((element, index, array) => array[index + 1] - element > 1) + 1;
 
 export { binarySearch, getSeatId, getHighestId, findMySeat };
