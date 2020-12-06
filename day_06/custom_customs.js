@@ -8,9 +8,8 @@ const countUniqueAnswers = (group) => {
 };
 
 const countSameAnswers = (group) => {
-  const chars = Array.from(group[0]);
   let count = 0;
-  chars.forEach((char) => {
+  [...group[0]].forEach((char) => {
     group.every((el) => el.includes(char)) && count++;
   });
   return count;
