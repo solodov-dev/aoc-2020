@@ -1,5 +1,5 @@
 import testInput from '../helpers/test_input.js';
-import { findContainers, inputToGraph, expence } from './handy_haversacs.js';
+import { capacity, containers } from './handy_haversacs.js';
 
 const input = testInput(
   `light red bags contain 1 bright white bag, 2 muted yellow bags.
@@ -25,13 +25,14 @@ dark violet bags contain no other bags.`
 
 describe('Handy haversacs', () => {
   it('Finds all possible containers for shiny gold bag', () => {
-    expect(findContainers(input, 'shiny gold')).toBe(4);
+    expect(containers(input, 'shiny gold')).toBe(4);
   });
 
-  it('Finds the expence of keeping a bag', () => {
-    expect(expence(input, 'shiny gold')).toBe(32);
+  it('Finds the capacity of a bag', () => {
+    expect(capacity(input, 'shiny gold')).toBe(32);
   });
-  it('Finds the expence of keeping a bag', () => {
-    expect(expence(input2, 'shiny gold')).toBe(126);
+
+  it('Finds the capacity of a bag', () => {
+    expect(capacity(input2, 'shiny gold')).toBe(126);
   });
 });

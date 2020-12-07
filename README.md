@@ -33,3 +33,4 @@ $ npm test
 - [Day 4: Passport Processing](day_04/)
 - [Day 5: Binary Boarding](day_05/)
 - [Day 6: Cusom Customs](day_06/)
+- [Day 7: Handy Haversacs](day_07/)

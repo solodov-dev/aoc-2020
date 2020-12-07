@@ -1,79 +1,59 @@
-const inputToGraph = (input, adder) => {
-  // light red bags contain 1 bright white bag, 2 muted yellow bags.
-  const graph = new Map();
-  input.forEach((line) => adder(graph, line.replace(/bags?\.?\s?/g, '')));
+const inputToGraph = (input, reducer) =>
+  input.reduce((graph, line) => reducer(graph, line), new Map());
+
+const addToGraphReverse = (graph, line) => {
+  const [, next, origins] = parseLine(line);
+  origins.split(', ').forEach((node) => {
+    if (!node.includes('no other')) {
+      const [, , key] = parseNode(node);
+      graph.has(key) ? graph.get(key).push(next) : graph.set(key, [next]);
+    }
+  });
   return graph;
 };
 
 const addToGraph = (graph, line) => {
-  // light red contain 1 bright white  2 muted yellow
-  // faded blue contain no other
-  const [destination, origins] = line.split('contain ');
-  origins
-    .trim()
-    .split(', ')
-    .forEach(
-      (origin) =>
-        origin !== 'no other' &&
-        update(graph, origin.trim(), destination.trim())
-    );
-};
-
-const update = (graph, origin, destination) => {
-  // origin = '1 bright white'
-  const index = origin.indexOf(' ');
-  const [expence, key] = [+origin.slice(0, index), origin.slice(index + 1)];
-  graph.has(key)
-    ? graph.get(key).push({ expence, destination })
-    : graph.set(key, [{ expence, destination }]);
-};
-
-const addToGraphReverse = (graph, line) => {
-  const [origin, neighbours] = line.split('contain ').map((el) => el.trim());
-  !neighbours.includes('no other') &&
+  const [, origin, next] = parseLine(line);
+  !next.includes('no other') &&
     graph.set(
       origin,
-      [...neighbours.split(', ')].map((neighbour) => ({
-        expence: +neighbour.slice(0, neighbour.indexOf(' ')),
-        name: neighbour.slice(neighbour.indexOf(' ') + 1).trim(),
-      }))
+      [...next.split(', ')].map((bag) => {
+        const [, capacity, node] = parseNode(bag);
+        return { capacity: +capacity, node };
+      })
     );
+  return graph;
 };
 
-const findContainers = (input, node) => {
+const parseLine = (line) => /(\w+ \w+) bags contain (.*)\./.exec(line);
+
+const parseNode = (node) => /(\d+) (\w+ \w+)/.exec(node);
+
+const containers = (input, node) => {
   const visited = new Set();
-  const graph = inputToGraph(input, addToGraph);
-  const visit = (node) => {
-    visited.add(node);
-    if (hasNeighbours(graph, node))
-      for (let neighbour of graph.get(node)) {
-        visit(neighbour.destination);
-      }
-  };
-  visit(node);
-  return visited.size - 1;
-};
-
-const expence = (input, node) => {
   const graph = inputToGraph(input, addToGraphReverse);
-  let expence = 0;
-  const visit = (node, parent) => {
-    expence = expence + parent * bagsWithin(graph, node);
-    for (let neighbour of graph.get(node)) {
-      graph.has(neighbour.name) && visit(neighbour.name, neighbour.expence);
+  const visit = (node) => {
+    for (let next of graph.get(node)) {
+      visited.add(next);
+      graph.has(next) && visit(next);
     }
   };
-  visit(node, 1);
-  return expence;
+  visit(node);
+  return visited.size;
 };
 
-const hasNeighbours = (graph, node) => Array.isArray(graph.get(node));
-
-const bagsWithin = (graph, node) => {
-  const current = graph.get(node);
-  if (Array.isArray(current))
-    return current.reduce((acc, neighbour) => (acc += neighbour.expence), 0);
-  return 0;
+const capacity = (input, node) => {
+  const graph = inputToGraph(input, addToGraph);
+  const visit = (node) => {
+    let count = 0;
+    for (const next of graph.get(node)) {
+      graph.has(next.node)
+        ? (count += next.capacity + next.capacity * visit(next.node))
+        : (count += next.capacity);
+    }
+    return count;
+  };
+  return visit(node);
 };
 
-export { inputToGraph, findContainers, expence };
+export { inputToGraph, containers, capacity };
