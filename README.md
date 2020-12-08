@@ -11,16 +11,19 @@ To save your vacation, you need to get all fifty stars by December 25th.
 Collect stars by solving puzzles. Two puzzles will be made available on each day in the Advent calendar; the second puzzle is unlocked when you complete the first. Each puzzle grants one star. Good luck!
 
 ## Install
+
 ```bash
 $ npm i
 ```
 
 ## Run
+
 ```bash
 $ npm run log [day number]
 ```
 
 ## Test
+
 ```bash
 $ npm test
 ```
@@ -34,3 +37,4 @@ $ npm test
 - [Day 5: Binary Boarding](day_05/)
 - [Day 6: Cusom Customs](day_06/)
 - [Day 7: Handy Haversacs](day_07/)
+- [Day 8: Handheld Halting](day_08/)
