@@ -38,3 +38,4 @@ $ npm test
 - [Day 6: Cusom Customs](day_06/)
 - [Day 7: Handy Haversacs](day_07/)
 - [Day 8: Handheld Halting](day_08/)
+- [Day 9: Encoding Error](day_09/)
