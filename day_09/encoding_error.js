@@ -17,10 +17,9 @@ const find = (input, preambleIndex) => {
 const weakness = (input, preambleIndex) => {
   const numbers = input.map((line) => +line);
   const error = find(input, preambleIndex);
-  const errorIndex = numbers.indexOf(error);
-  const beforeErrorArray = numbers.slice(0, errorIndex);
-
+  const beforeErrorArray = numbers.slice(0, numbers.indexOf(error));
   let sumRangeArray = [];
+
   for (let i = 0; i < beforeErrorArray.length - 2; i++) {
     for (let j = i + 2; j < beforeErrorArray.length; j++) {
       if (
