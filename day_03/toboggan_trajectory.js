@@ -14,7 +14,7 @@ const countTrees = (input, down, right) => {
   return trees;
 };
 
-const product = (file, countTrees) =>
+const product = (file) =>
   [
     [1, 3],
     [1, 1],

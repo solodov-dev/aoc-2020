@@ -24,7 +24,7 @@ const input = testInput(
 576`
 );
 
-describe('', () => {
+describe('Encoding error', () => {
   it('Finds the first wrong number', () => {
     expect(find(input, 5)).toBe(127);
   });

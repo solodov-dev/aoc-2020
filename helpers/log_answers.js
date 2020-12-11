@@ -2,10 +2,11 @@ import fs from 'fs';
 
 const logAnswers = async (day) => {
   console.log(`Answers for Day ${day}`);
+  if (day < 10) day = '0' + day;
   try {
-    const { default: answers } = await import(`../day_0${day}/index.js`);
+    const { default: answers } = await import(`../day_${day}/index.js`);
     fs.readFile(
-      new URL(`../inputs/input${day}`, import.meta.url),
+      new URL(`../inputs/input_${day}`, import.meta.url),
       'utf8',
       (err, data) => {
         err

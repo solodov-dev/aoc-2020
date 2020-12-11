@@ -18,6 +18,6 @@ describe('Toboggan trajectory', () => {
   });
 
   it('Finds the multiplication of test slopes', () => {
-    expect(product(test, countTrees)).toBe(336);
+    expect(product(test)).toBe(336);
   });
 });
