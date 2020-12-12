@@ -40,3 +40,4 @@ $ npm test
 - [Day 8: Handheld Halting](day_08/)
 - [Day 9: Encoding Error](day_09/)
 - [Day 10: Seating System](day_10/)
+- [Day 11: Rain Risk](day_11/)
