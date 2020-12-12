@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "jest",
-    "log": "node helpers/log_answers"
+    "log": "node helpers/log_answers.js",
+    "inspect": "node --inspect helpers/log_answers.js"
   },
   "repository": {
     "type": "git",

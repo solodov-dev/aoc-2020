@@ -39,3 +39,4 @@ $ npm test
 - [Day 7: Handy Haversacs](day_07/)
 - [Day 8: Handheld Halting](day_08/)
 - [Day 9: Encoding Error](day_09/)
+- [Day 10: Seating System](day_10/)

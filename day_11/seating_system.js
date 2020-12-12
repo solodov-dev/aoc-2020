@@ -1,49 +1,64 @@
-const adjacent = (seats, row, col) => {
-  const arr = [];
-  for (let i = row - 1; i <= row + 1; i++) {
-    for (let j = col - 1; j <= col + 1; j++) {
-      if (i >= 0 && i < seats.length && j >= 0 && j < seats[i].length)
-        if (!(i === row && j === col)) arr.push(seats[i][j]);
-    }
+const look = (seats, row, col, rowOffset, colOffset) => {
+  const [nextRow, nextCol] = [row + rowOffset, col + colOffset];
+  return seats[nextRow] && seats[nextRow][nextCol]
+    ? seats[nextRow][nextCol]
+    : null;
+};
+
+const lookDeep = (seats, row, col, rowOffset, colOffset) => {
+  const [nextRow, nextCol] = [row + rowOffset, col + colOffset];
+  if (seats[nextRow] && seats[nextRow][nextCol]) {
+    const cur = seats[nextRow][nextCol];
+    return cur === '.'
+      ? lookDeep(seats, nextRow, nextCol, rowOffset, colOffset)
+      : cur;
   }
-  return arr;
+  return null;
 };
 
-const adjacentFar = (seats, row, col) => {
-  const arr = [];
-
-  return arr;
+const directions = () => {
+  const d = [-1, 0, 1];
+  const newArr = d.flatMap((row) =>
+    d.map((col) => ({ rowOffset: row, colOffset: col }))
+  );
+  newArr.splice(4, 1);
+  return newArr;
 };
 
-const walk = (layout) => {
-  const newSeats = [];
+const getVisibleSeats = (layout, row, col, watcher) =>
+  directions()
+    .map((d) => watcher(layout, row, col, d.rowOffset, d.colOffset))
+    .filter((el) => el);
+
+const walk = (layout, watcher, occupied) => {
+  const newLayout = [];
   let replacements = 0;
   for (let [row, line] of layout.entries()) {
-    newSeats.push([]);
+    newLayout.push([]);
     for (let [col, seat] of line.entries()) {
-      const adjArray = adjacent(layout, row, col);
+      const visibleSeats = getVisibleSeats(layout, row, col, watcher);
       let newSeat = seat;
-      if (seat === 'L' && adjArray.every((seat) => seat !== '#')) {
+      if (seat === 'L' && visibleSeats.every((seat) => seat !== '#')) {
         newSeat = '#';
         replacements++;
-      }
-      if (seat === '#' && adjArray.filter((seat) => seat === '#').length >= 4) {
+      } else if (
+        seat === '#' &&
+        visibleSeats.filter((seat) => seat === '#').length >= occupied
+      ) {
         newSeat = 'L';
         replacements++;
       }
-      newSeats[row].push(newSeat);
+      newLayout[row].push(newSeat);
     }
   }
-  return [replacements, newSeats];
+  return replacements ? walk(newLayout, watcher, occupied) : newLayout;
 };
 
-const fill = (input) => {
-  let inputArray = input.map((line) => Array.from(line));
-  let replacements = 1;
-  while (replacements > 0) {
-    [replacements, inputArray] = walk(inputArray);
-  }
-  return inputArray.join().match(/#/g).length;
+const seat = (input, watcher, occupied) => {
+  const layout = input.map((line) => Array.from(line));
+  return countOccupied(walk(layout, watcher, occupied));
 };
 
-export { fill };
+const countOccupied = (layout) => layout.join().match(new RegExp(/#/g)).length;
+
+export { seat, lookDeep, look };
