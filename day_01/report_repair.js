@@ -18,6 +18,6 @@ const sumThree = (input) => {
 
 const parse = (input) => new Set(input.map((n) => +n));
 
-const multiply = (arr) => arr.reduce((acc, cur) => (acc *= cur), 1);
+const multiply = (arr) => arr.reduce((acc, cur) => acc * cur);
 
 export { sumTwo, sumThree, multiply };
