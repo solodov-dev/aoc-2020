@@ -1,31 +1,23 @@
-const toNumberAndSort = (input) =>
-  input.map((line) => +line).sort((a, b) => a - b);
-
-const getTwoNumbers = (input) => {
-  const report = toNumberAndSort(input);
-  for (let i = 0; i < report.length - 1; i++) {
-    for (let j = i + 1; j < report.length; j++) {
-      if (report[i] + report[j] === 2020) return report[i] * report[j];
-      if (report[i] + report[j] > 2020) break;
-    }
+const sumTwo = (input, sum) => {
+  const set = parse(input);
+  set.delete(0);
+  for (let num of set) {
+    const complement = sum - num;
+    if (set.has(complement)) return [complement, num];
   }
-  return 'Not found';
 };
 
-const getThreeNumbers = (input) => {
-  const report = toNumberAndSort(input);
-  for (let i = 0; i < report.length - 2; i++) {
-    if (report[i] === 0) continue;
-    for (let j = i + 1; j < report.length - 1; j++) {
-      if (report[i] + report[j] > 2020) break;
-      for (let k = j + 1; k < report.length; k++) {
-        if (report[i] + report[j] + report[k] === 2020)
-          return report[i] * report[j] * report[k];
-        if (report[i] + report[j] + report[k] > 2020) break;
-      }
-    }
+const sumThree = (input) => {
+  const set = parse(input);
+  for (let num of set) {
+    const sumOfTwo = 2020 - num;
+    const sum = sumTwo(input, sumOfTwo);
+    if (sum) return [...sum, num];
   }
-  return 'Not found';
 };
 
-export { getTwoNumbers, getThreeNumbers };
+const parse = (input) => new Set(input.map((n) => +n));
+
+const multiply = (arr) => arr.reduce((acc, cur) => (acc *= cur), 1);
+
+export { sumTwo, sumThree, multiply };

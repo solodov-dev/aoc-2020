@@ -1,18 +1,21 @@
-import { getTwoNumbers, getThreeNumbers } from './report_repair.js';
+import { sumTwo, sumThree, multiply } from './report_repair.js';
+import testInput from '../helpers/test_input.js';
 
-const test = `1721
+const input = testInput(
+  `1721
 979
 366
 299
 675
-1456`.split('\n');
+1456`
+);
 
 describe('Report repair', () => {
   it('Finds a multiplication of two numbers', () => {
-    expect(getTwoNumbers(test)).toBe(514579);
+    expect(multiply(sumTwo(input, 2020))).toBe(514579);
   });
 
   it('Finds a multiplication of three numbers', () => {
-    expect(getThreeNumbers(test)).toBe(241861950);
+    expect(multiply(sumThree(input))).toBe(241861950);
   });
 });
