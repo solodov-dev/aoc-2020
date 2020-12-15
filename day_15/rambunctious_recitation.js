@@ -1,19 +1,35 @@
-const play = (input) => {
-  const history = input.map((e) => +e);
+const play = (input, limit) => {
+  const history = input.reduce(
+    (map, cur, index) => map.set(cur, { lastSpoken: index }),
+    new Map()
+  );
 
-  for (let i = 3; i < 2020; i++) {
-    history.lastIndexOf(last(history), history.length - 2) !== -1
-      ? history.push(next(history, last(history)))
-      : history.push(0);
+  let lastNum = input[input.length - 1];
+
+  for (let i = history.size; i < limit; i++) {
+    if (history.get(lastNum).beforeLastSpoken !== undefined) {
+      let nextNumber = next(history.get(lastNum));
+      lastNum = nextNumber;
+      history.set(nextNumber, {
+        beforeLastSpoken: history.has(nextNumber)
+          ? history.get(nextNumber).lastSpoken
+          : undefined,
+        lastSpoken: i,
+      });
+    } else {
+      history.set(0, {
+        beforeLastSpoken: history.has(0)
+          ? history.get(0).lastSpoken
+          : undefined,
+        lastSpoken: i,
+      });
+      lastNum = 0;
+    }
   }
 
-  console.log(history);
-  return last(history);
+  return lastNum;
 };
 
-const last = (arr) => arr[arr.length - 1];
-
-const next = (history, last) =>
-  history.length - (history.lastIndexOf(last, history.length - 2) + 1);
+const next = (entry) => entry.lastSpoken - entry.beforeLastSpoken;
 
 export { play };

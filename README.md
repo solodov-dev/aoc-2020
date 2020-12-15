@@ -43,3 +43,5 @@ $ npm test
 - [Day 11: Seating System](day_11/)
 - [Day 12: Rain Risk](day_12/)
 - [Day 13: Shuttle Search](day_13/)
+- [Day 14: Docking Data](day_14/)
+- [Day 15: Rambunctious Recitation](day_15/)
