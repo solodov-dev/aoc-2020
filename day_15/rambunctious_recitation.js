@@ -9,25 +9,21 @@ const play = (input, limit) => {
   for (let i = history.size; i < limit; i++) {
     if (history.get(lastNum).beforeLastSpoken !== undefined) {
       let nextNumber = next(history.get(lastNum));
-      lastNum = nextNumber;
-      history.set(nextNumber, {
-        beforeLastSpoken: history.has(nextNumber)
-          ? history.get(nextNumber).lastSpoken
-          : undefined,
-        lastSpoken: i,
-      });
+      lastNum = update(history, nextNumber, i);
     } else {
-      history.set(0, {
-        beforeLastSpoken: history.has(0)
-          ? history.get(0).lastSpoken
-          : undefined,
-        lastSpoken: i,
-      });
-      lastNum = 0;
+      lastNum = update(history, 0, i);
     }
   }
 
   return lastNum;
+};
+
+const update = (map, num, last) => {
+  map.set(num, {
+    beforeLastSpoken: map.has(num) ? map.get(num).lastSpoken : undefined,
+    lastSpoken: last,
+  });
+  return num;
 };
 
 const next = (entry) => entry.lastSpoken - entry.beforeLastSpoken;
