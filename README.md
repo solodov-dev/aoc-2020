@@ -45,3 +45,5 @@ $ npm test
 - [Day 13: Shuttle Search](day_13/)
 - [Day 14: Docking Data](day_14/)
 - [Day 15: Rambunctious Recitation](day_15/)
+- [Day 16: Ticket Translation](day_16/)
+- [Day 17: Conway Cubes](day_17/)
